@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="layout/plantillaProductos :: head">
+        <title>Productos</title>
+    </head>
+    <body>
+        <header th:replace="layout/plantillaProductos :: header"></header>
+
+        <div class="container">
+
+            <!-- Button trigger modal -->
+            <div class="row">
+                <div class="col-md-3 mb-2">
+                    <a href="#" class="btn btn-primary btn-block" data-bs-toggle="modal" data-bs-target="#agregarCliente">
+                        <i class="fas fa-plus"></i> Agregar
+                    </a>
+                </div>
+            </div>
+            <section th:replace="layout/listadoProducto :: listadoProductos"></section>
+
+        </div>
+        <footer th:replace="layout/plantillaProductos :: footer"></footer>
+    </body>
+</html>

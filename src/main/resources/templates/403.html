@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>403</title>
+    
+    <style>
+        /* Estilos generales */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ff6b6b, #f06595);
+            color: #fff;
+        }
+
+        /* Contenedor de error */
+        .error-container {
+            text-align: center;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Título */
+        .error-container h1 {
+            font-size: 72px;
+            margin: 0;
+        }
+
+        /* Subtítulo */
+        .error-container h2 {
+            font-size: 24px;
+            margin: 16px 0;
+        }
+
+        /* Mensaje */
+        .error-container p {
+            font-size: 18px;
+            margin: 24px 0;
+        }
+
+        /* Botón de regreso */
+        .error-container a {
+            display: inline-block;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: #fff;
+            color: #ff6b6b;
+            font-size: 16px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .error-container a:hover {
+            background-color: #f0e68c;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <h1>403</h1>
+        <h2>Acceso Denegado</h2>
+        <p>No tienes permiso para acceder a esta página.</p>
+        <a th:href="@{/}">Volver al Inicio</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="layout/plantilla :: head">  
+        <title>Listado Productos</title>
+    </head>
+    <body>
+        <section th:fragment="listadoProductos">
+            <!--
+            <div th:if="${page != null and !page.empty}">
+            -->
+            <div>
+                <div class="card">
+                    <div class="card card-header">
+                        <input type="text" class="form-control" placeholder="Buscar Producto" aria-label="buscarProducto" aria-describedby="button-addon2" id="buscarProducto" oninput="buscarProductos()" />
+                    </div>
+                    <div class="card card-body">
+                        <table class="table border-top table-bordered mb-0 scroll" id="productosTable" >
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th class="text-center"></th>
+                                    <th>Codigo</th>
+                                    <th>Nombre</th>
+                                    <th>Stock</th>
+                                    <th>Precio</th>
+                                    <th>Categoria</th>
+                                    <th>Fecha de Creacion</th>
+                                    <th>Descripcion</th>
+                                    <th class="text-center">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="producto : ${page.content}">
+                                    <th scope="row">1</th>
+                                    <td class="align-middle text-center">
+                                        <div class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0 align-top">
+                                            <input class="custom-control-input" id="item-9" type="checkbox" /> <label class="custom-control-label" for="item-9"></label>
+                                        </div>
+                                    </td>
+                                    <td class="text-nowrap align-middle" th:text="${producto.id}">Codigo</td>
+                                    <td class="text-nowrap align-middle" th:text="${producto.nombre}">Nombre</td>
+                                    <td class="text-nowrap align-center" th:text="${producto.stock}">Stock</td>
+                                    <td class="text-nowrap align-middle" th:text="${producto.precio}">Precio</td>
+                                    <td class="text-nowrap align-middle" th:text="${producto.categoria}">Categoria</td>
+                                    <td class="text-nowrap align-middle" th:text="${producto.fecha}">Fecha</td>
+                                    <td class="text-nowrap align-middle" th:text="${producto.descripcion}">Descripcion</td>
+                                    <td class="text-center align-middle">
+                                        <div class="btn-group align-top">
+                                            <button class="btn btn-sm btn-primary badge" data-target="#user-form-modal" data-bs-toggle="" type="button">Edit</button> <button class="btn btn-sm btn-primary badge" type="button"><i class="fa fa-trash"></i></button>
+                                        </div>
+                                    </td>                                   
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card card-footer">
+                        <p>Mostrando [[${page.size}]] de [[${page.totalElements}]] productos</p>
+                        <nav class="page navegation d-flex justify-content-between">
+                            <div>
+                                <select id="pageSize" name="size" class="form-control" onchange="changePageSize()">
+                                    <option th:each="size : ${pageSizeOptions}" th:value="${size}"
+                                            th:text="${size}" th:selected="${page.size == size}">                                              
+                                    </option>                            
+                                </select>
+                            </div>                  
+                            <ul class="pagination mb-0">
+                                <li class="page-item" th:classappend="${page.first} ? 'disabled' : ''"><a
+                                        class="page-link" th:href="@{'?page=0&size=' + ${page.size}}">Primera</a>
+                                </li>
+                                <li class="page-item" th:classappend="${page.first} ? 'disabled' : ''">
+                                    <a class="page-link" th:with="prevPage=${page.number - 1}" th:href="@{'?page=' + ${prevPage} + '&size=' + ${page.size}}" >Anterior</a>
+                                </li>
+                                <li class="page-item" th:each="i : ${pageNumbers}"
+                                    th:classappend="${i == page.number + 1} ? 'active' : ''"><a class="page-link" th:with="pageNum=${i - 1}"
+                                                                                            th:href="@{'?page=' + ${pageNum} + '&size=' + ${page.size}}"
+                                                                                            th:text="${i}"></a>
+                                </li>
+                                <li class="page-item"
+                                    th:classappend="${page.last} ? 'disabled' : ''"><a
+                                        class="page-link" th:with="nextPage=${page.number + 1}"
+                                        th:href="@{'?page=' + ${nextPage} + '&size=' + ${page.size}}">Siguiente</a>
+
+                                </li>
+                                <li class="page-item"
+                                    th:classappend="${page.last} ? 'disabled' : ''"><a
+                                        class="page-link" th:with="lastPage=${page.totalPages -1}"
+                                        th:href="@{'?page=' + ${lastPage} + '&size=' + ${page.size}}">Ultima</a>
+                                </li>
+                            </ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!--
+            <div th:if="${page == null or page.empty}">
+                
+            </div>
+            -->
+            <script th:inline="javascript">
+                function changePageSize() {
+                    const pageSize = document.getElementById("pageSize").value;
+                            const currentPage = [[${page.number}
+                            ]];
+                    window.location.href = "?page=" + currentPage + "&size=" + pageSize;
+                }
+            </script>
+        </section>
+    </body>
+</html>
